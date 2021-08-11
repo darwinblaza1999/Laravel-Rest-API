@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('App\\Http\\Controllers')->group(function(){
     Route::post('product/upload', 'ProductController@upload');
     Route::post('user/upload', 'UserController@upload');
-    Route::post('user', 'UserController@create');
+    //Route::post('user', 'UserController@create');
 
-    //Route::post('login', 'UserController@login');
+    //Route::post('register', 'RegisterController@register');
 
     //Route ::post('forgot', 'ForgotController@forgot');
 
@@ -31,7 +31,7 @@ Route::namespace('App\\Http\\Controllers')->group(function(){
         'product' => 'ProductController',
     ]);
     Route::apiResources([
-        'user' => 'UserController',
+        'users' => 'UserController',
     ]);
 
 });

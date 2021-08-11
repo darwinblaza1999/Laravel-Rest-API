@@ -21,7 +21,7 @@ class LoginController extends Controller
 
             $user = Auth::user();
             $success['token'] = $user->createToken('MyApp')-> accessToken;
-            return response()->json(['return', $user]);
+            return response()->json(['return', $user, $success]);
         }
         else
         {

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
+//use Validator;
 
 class ProductController extends BaseController
 {
@@ -50,27 +52,44 @@ class ProductController extends BaseController
      */
     public function store(Request $request)
     {
-        // $product = $this->product->create([
-        //     'name' => $request->get('name'),
-        //     'description' => $request->get('description'),
-        //     'price' => $request ->get('price'),
-        //     'category_id' => $request->get('category_id'),
-        // ]);
-        // $tag_ids = [];
-        // foreach ($request->get('tags') as $tag) {
-        //     $tag_ids[] = $tag['id'];
-        // }
-        // $product->tags()->sync($tag_ids);
+        //$path = $file->store('public/upload');
 
-        // return $thid->sendResponse($product, 'Product Successfully Created');
         $products = Product::create([
             'name' => $request['name'],
             'description' => $request['description'],
             'price' => $request['price'],
             'category_id' => $request['category_id'],
+            'photo' => $request->photo->store('public/upload'),
         ]);
 
         return $this->sendResponse($products, 'Product Successfully Created');
+
+        // $validator = Validator::make($request->all(),
+        // [
+        //     'name' => 'required',
+        //     'description' => 'required',
+        //     'price' => 'required'
+        // ]);
+        // if($validator->fails())
+        // {
+        //     return response()->json(['error' => $validator->error()], 401);
+        // }
+        // if ($files = $request->file('file')){
+        //     $file = $request->file->store('public/upload');
+
+        //     $product = new Product();
+        //     $product -> name = 'name' => $request['name']
+        //     $product -> description = 'description' => $request['description'],
+        //     $product -> price = 'price' => $request['price'],
+        //     $product -> category_id = 'category_id' => $request['category_id'],
+        //     $product -> image = $file;
+        //     $product -> save();
+
+        //     return response()->json(["success" => true,
+        //                             "message" => "sakto",
+        //                             "file" => $file]);
+
+        //}
     }
 
     /**
@@ -84,7 +103,7 @@ class ProductController extends BaseController
         //$product = $this->product->with(['category', 'tags'])->findOrFail($id);
         $product = Product::findOrFail($id);
 
-        return $this->sendResponse($product, 'Prodect Details');
+        return $this->sendResponse($product, 'Product Details');
     }
 
     /**

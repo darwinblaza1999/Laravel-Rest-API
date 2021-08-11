@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -36,14 +37,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create([
-            'name' => $request['name'],
-            'address' => $request['address'],
-            'email' => $request['email'],
-            'password' =>request['password'],
-        ]);
+        // $user = User::create([
+        //     'name' => $request['name'],
+        //     'address' => $request['address'],
+        //     'email' => $request['email'],
+        //     'password' =>request['password'],
+        // ]);
 
-        return $this->sendResponse($user, 'User Successfully Created');
+        // return $this->sendResponse($user, 'User Successfully Created');
     }
 
     /**
